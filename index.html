@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Test</title>
+</head>
+<body>
+    <div class="container">
+        <div class="img">
+            <img src="hand.jpg" alt="">
+        </div>
+        <div class="main">
+            <h1>Check your typing skills in 60 seconds</h1>
+            <h2  class="msg" id="msg"></h2>
+        </div>
+        <div >
+            <textarea class="content" placeholder="type here !!!" name="" id="content" cols="100" rows="10"></textarea>
+        </div>
+        <div>
+            <button class="btn" id="btn">Start</button>
+        </div>
+        <div>
+      <p>the average type word is only 44.4 word per min.|| let see how much you make</p>
+      <p>made by:shiva singh</p>
+        </div>
+    </div>
+
+
+    <script>
+        const typeWorld = [
+            "Life is a beautiful journey that is meant to be embraced to the fullest every day. However, that doesn’t mean you always wake up ready to seize the day, and sometimes need a reminder that life is a great gift. Whether a funny quote from a famous celebrity or an encouraging message about giving it your best from a successful business",
+            "Your time is limited, so don’t waste it living someone else’s life. Don’t be trapped by dogma – which is living with the results of other people’s thinking",
+            "Everybody wants to be famous, but nobody wants to do the work. I live by that. You grind hard so you can play hard. At the end of the day, you put all the work in, and eventually it’ll pay off. It could be in a year, it could be in 30 years. Eventually, your hard work will pay off.",
+            "Life is never easy. There is work to be done and obligations to be met – obligations to truth, to justice, and to liberty"
+        ];
+
+      const msg = document.getElementById("msg");
+       const content = document.getElementById("content");
+       const btn = document.getElementById("btn");
+        let starTime,endTime;
+
+  playgame = ()=>{
+        const randomNumber = Math.floor(Math.random()*typeWorld.length);
+         msg.innerText = typeWorld[randomNumber];
+         let date = new Date();
+         starTime = date.getTime();
+         btn.innerText ="Done";
+   }
+   endGame=()=>{
+        let date = new Date();
+        endTime = date.getTime();
+        let totalTime = ((endTime)-(starTime))/1000;
+        let totalStr = content.value;
+        let wordCount = wordcount(totalStr);
+        let speed = Math.round((wordCount/totalTime)*60);
+        let finalmsg = "you typed total at "+speed+ " words per min.";
+        msg.innerText = finalmsg;
+      
+   }
+   wordcount=(str)=>{
+            let response = str.split(" ").length;
+            return response;
+
+        }
+   btn.addEventListener("click",function(){
+        if(this.innerText == "Start") {
+            content.disabled = false;
+            playgame();
+        } else if(this.innerText == "Done"){
+            content.disabled = true;
+            btn.innerText = "Start";
+            endGame();
+        } 
+       })
+    
+    </script>
+</body>
+</html>
